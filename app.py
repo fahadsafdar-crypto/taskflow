@@ -5,6 +5,15 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 def get_conn():
     # Open a connection using the URL from the environment.
     return psycopg2.connect(os.environ["DATABASE_URL"])
